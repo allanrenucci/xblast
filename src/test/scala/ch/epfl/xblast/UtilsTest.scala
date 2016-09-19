@@ -1,10 +1,9 @@
 package ch.epfl.xblast
 
+import ch.epfl.xblast.Utils.SeqOps
 import org.scalatest.FunSuite
 
-class UtilTest extends FunSuite {
-  import Util._
-
+class UtilsTest extends FunSuite {
 
   test("mirrored throws exception on empty sequence") {
     intercept[UnsupportedOperationException] {

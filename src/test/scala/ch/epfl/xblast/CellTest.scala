@@ -56,7 +56,7 @@ class CellTest extends FunSuite {
     assert(c1 == c3)
   }
 
-  test("neighborOfCornerCorrect") {
+  test("Neighbors of corners are correct") {
     val NE = Cell(14,  0)
     val NW = Cell( 0,  0)
     val SE = Cell(14, 12)

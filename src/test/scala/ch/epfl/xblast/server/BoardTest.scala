@@ -1,7 +1,7 @@
 package ch.epfl.xblast.server
 
 import ch.epfl.xblast.Cell
-import ch.epfl.xblast.Util.SeqOps
+import ch.epfl.xblast.Utils.SeqOps
 import org.scalatest.FunSuite
 
 class BoardTest extends FunSuite {
