@@ -4,9 +4,9 @@ import ch.epfl.xblast.server.Ticks._
 import ch.epfl.xblast.{Cell, Direction, PlayerID}
 
 final class Bomb private (val ownerId: PlayerID.Value,
-                  val position: Cell,
-                  val fuseLengths: Stream[Int],
-                  val range: Int) {
+                          val position: Cell,
+                          val fuseLengths: Stream[Int],
+                          val range: Int) {
   require(fuseLengths.nonEmpty)
   require(range > 0)
 

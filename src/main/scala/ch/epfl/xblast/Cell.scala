@@ -6,7 +6,8 @@ final class Cell private (val x: Int, val y: Int) {
   import Cell._
   import Direction._
 
-  def rowMajorIndex: Int = x + COLUMNS * y
+  def rowMajorIndex: Int =
+    x + COLUMNS * y
 
   def neighbor(dir: Direction): Cell = dir match {
     case N => Cell(x, y - 1)
@@ -19,6 +20,9 @@ final class Cell private (val x: Int, val y: Int) {
     case Cell(`x`, `y`) => true
     case _              => false
   }
+
+  override def hashCode: Int =
+    rowMajorIndex
 
   override def toString: String = s"($x, $y)"
 }
@@ -64,5 +68,6 @@ object Cell {
     new Cell(x, y)
   }
 
-  def unapply(arg: Cell): Option[(Int, Int)] = Some((arg.x, arg.y))
+  def unapply(arg: Cell): Option[(Int, Int)] =
+    Some((arg.x, arg.y))
 }

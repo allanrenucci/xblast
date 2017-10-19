@@ -1,13 +1,16 @@
 package ch.epfl.xblast.server
 
-import ch.epfl.xblast.Cell
+import ch.epfl.xblast.{Cell, Direction, PlayerID}
 
 final class GameState private (val ticks: Int,
                                val board: Board,
                                val players: Seq[Player],
-                               val bombs: Seq[Bomb],
-                               val explosions: Seq[Stream[Stream[Cell]]],
-                               val blasts: Seq[Stream[Cell]]) {
+                               bombs: Seq[Bomb],
+                               explosions: Seq[Stream[Stream[Cell]]],
+                               blasts: Seq[Stream[Cell]]) {
+
+  require(ticks >= 0)
+  require(players.size == PlayerID.values.size)
 
   def isGameOver: Boolean =
     ticks > Ticks.TOTAL_TICKS || players.count(_.isAlive) <= 1
@@ -23,7 +26,13 @@ final class GameState private (val ticks: Int,
   def alivePlayers: Seq[Player] =
     players.filter(_.isAlive)
 
-  def next: GameState = {
+  def bombedCells: Map[Cell, Bomb] =
+    bombs.map(b => (b.position, b)).toMap
+
+  def blastedCells: Set[Cell] =
+    blasts.flatMap(_.headOption).toSet
+
+  def next(speedChangeEvents: Map[PlayerID.Value, Direction], bombDropEvents: Set[PlayerID.Value]): GameState = {
     val board1 = ???
     val bombs1 = ???
     val explosions1 = ???
@@ -38,9 +47,7 @@ final class GameState private (val ticks: Int,
       case x #:: xs if board0.blockAt(x).isFree => xs
     }
 
-    val news = explosions0.collect {
-      case x #:: _ => x
-    }
+    val news = explosions0.map(_.head)
 
     existings ++ news
   }

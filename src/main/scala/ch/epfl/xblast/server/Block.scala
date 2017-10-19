@@ -23,7 +23,6 @@ sealed trait Block {
     case FREE | BONUS_BOMB | BONUS_RANGE => true
     case _                               => false
   }
-    this == FREE
 
   def castsShadow: Boolean = this match {
     case INDESTRUCTIBLE_WALL | DESTRUCTIBLE_WALL | CRUMBLING_WALL => true
